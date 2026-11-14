@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
-import Preloader from './components/Preloader';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import UniformsPage from './pages/UniformsPage';
-import ClientsPage from './pages/ClientsPage';
-import ContactPage from './pages/ContactPage';
-import CustomerPortalPage from './pages/CustomerPortalPage';
-import NotFoundPage from './pages/NotFoundPage';
 
-import AdminLoginPage from './admin/AdminLoginPage';
-import AdminLayout from './admin/AdminLayout';
-import AdminDashboard from './admin/AdminDashboard';
-import AdminInquiriesPage from './admin/AdminInquiriesPage';
-import AdminSchoolsPage from './admin/AdminSchoolsPage';
+// Lazy-load all pages for instant initial paint
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const UniformsPage = lazy(() => import('./pages/UniformsPage'));
+const ClientsPage = lazy(() => import('./pages/ClientsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const CustomerPortalPage = lazy(() => import('./pages/CustomerPortalPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+
+const AdminLoginPage = lazy(() => import('./admin/AdminLoginPage'));
+const AdminLayout = lazy(() => import('./admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
+const AdminInquiriesPage = lazy(() => import('./admin/AdminInquiriesPage'));
+const AdminSchoolsPage = lazy(() => import('./admin/AdminSchoolsPage'));
 
 // Scroll To Top on route change
 function ScrollToTop() {
@@ -43,33 +44,34 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Preloader />
-      <Routes>
-        {/* Public Website Routes */}
-        <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
-        <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
-        <Route path="/uniforms" element={<PublicLayout><UniformsPage /></PublicLayout>} />
-        <Route path="/modules" element={<PublicLayout><UniformsPage /></PublicLayout>} />
-        <Route path="/clients" element={<PublicLayout><ClientsPage /></PublicLayout>} />
-        <Route path="/3d-showroom" element={<Navigate to="/uniforms" replace />} />
-        <Route path="/3d-customizer" element={<Navigate to="/uniforms" replace />} />
-        <Route path="/customizer" element={<Navigate to="/uniforms" replace />} />
-        <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
-        <Route path="/customer-portal" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
-        <Route path="/customer-dashboard" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
-        <Route path="/customer-login" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
+      <Suspense fallback={null}>
+        <Routes>
+          {/* Public Website Routes */}
+          <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+          <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
+          <Route path="/uniforms" element={<PublicLayout><UniformsPage /></PublicLayout>} />
+          <Route path="/modules" element={<PublicLayout><UniformsPage /></PublicLayout>} />
+          <Route path="/clients" element={<PublicLayout><ClientsPage /></PublicLayout>} />
+          <Route path="/3d-showroom" element={<Navigate to="/uniforms" replace />} />
+          <Route path="/3d-customizer" element={<Navigate to="/uniforms" replace />} />
+          <Route path="/customizer" element={<Navigate to="/uniforms" replace />} />
+          <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
+          <Route path="/customer-portal" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
+          <Route path="/customer-dashboard" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
+          <Route path="/customer-login" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
 
-        {/* Admin Authentication & Console Routes */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="inquiries" element={<AdminInquiriesPage />} />
-          <Route path="schools" element={<AdminSchoolsPage />} />
-        </Route>
+          {/* Admin Authentication & Console Routes */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="inquiries" element={<AdminInquiriesPage />} />
+            <Route path="schools" element={<AdminSchoolsPage />} />
+          </Route>
 
-        {/* 404 Catch All */}
-        <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
-      </Routes>
+          {/* 404 Catch All */}
+          <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
