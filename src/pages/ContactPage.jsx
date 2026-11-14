@@ -76,31 +76,66 @@ export default function ContactPage() {
       // 1. Save locally so it appears in the Admin Dashboard immediately
       const saved = saveInquiry(formData);
 
-      // 2. If Formspree endpoint is configured, forward submission
-      const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
-      if (formspreeEndpoint && formspreeEndpoint.startsWith('http')) {
-        try {
-          await fetch(formspreeEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({
-              ...formData,
-              inquiryId: saved.id,
-              submittedAt: new Date().toISOString(),
-            }),
-          });
-        } catch (apiErr) {
-          console.warn('Formspree webhook dispatch skipped/failed', apiErr);
-        }
+      // 2. Dispatch email directly to thestitchroom95@gmail.com via FormSubmit endpoint
+      const endpoint =
+        import.meta.env.VITE_FORMSUBMIT_ENDPOINT ||
+        `https://formsubmit.co/ajax/${BRAND_INFO.email}`;
+
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            _subject: `New Institutional Inquiry: ${formData.org || formData.name} [Ref: ${saved.id}]`,
+            _captcha: 'false',
+            _template: 'table',
+            _replyto: formData.email,
+            'Inquiry Reference ID': saved.id,
+            'Client / Contact Name': formData.name,
+            'Institution / School / Organization': formData.org || 'Not provided',
+            'Official Email Address': formData.email,
+            'Contact Phone Number': formData.phone,
+            'Uniform Category': formData.category,
+            'Estimated Batch Quantity': formData.quantity,
+            'Special Specifications / Notes': formData.notes || 'None provided',
+            'Submission Date & Time': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+          }),
+        });
+      } catch (apiErr) {
+        console.warn('Background email endpoint dispatch attempted', apiErr);
       }
 
       setSubmittedInquiry(saved);
       setLoading(false);
     } catch (err) {
       console.error('Submission error', err);
-      setErrorMessage('An unexpected error occurred while saving your inquiry. Please contact us directly via phone or WhatsApp.');
+      setErrorMessage('An unexpected error occurred while saving your inquiry. Please contact us directly via email or WhatsApp.');
       setLoading(false);
     }
+  };
+
+  const generateMailtoUrl = () => {
+    const subject = encodeURIComponent(
+      `Institutional Inquiry - ${formData.org || formData.name} (${submittedInquiry?.id || 'Ref'})`
+    );
+    const body = encodeURIComponent(
+      `Hello The Stitch Room Team,\n\n` +
+      `I have submitted an inquiry with the following specifications:\n\n` +
+      `• Reference ID: ${submittedInquiry?.id || 'Direct'}\n` +
+      `• Name: ${formData.name}\n` +
+      `• Institution / School: ${formData.org || 'N/A'}\n` +
+      `• Phone / WhatsApp: ${formData.phone}\n` +
+      `• Email: ${formData.email}\n` +
+      `• Uniform Category: ${formData.category}\n` +
+      `• Estimated Quantity: ${formData.quantity}\n` +
+      `• Specific Requirements / Notes: ${formData.notes || 'None'}\n\n` +
+      `Please provide fabric samples, sizing details, and formal bulk quotation.\n\n` +
+      `Regards,\n${formData.name}`
+    );
+    return `mailto:${BRAND_INFO.email}?subject=${subject}&body=${body}`;
   };
 
   const generateWhatsAppUrl = () => {
@@ -262,11 +297,21 @@ export default function ContactPage() {
                   <div style={{ display: 'inline-block', background: 'var(--bg-muted)', padding: '0.5rem 1.2rem', borderRadius: 'var(--radius-sm)', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '1.2rem' }}>
                     Reference ID: {submittedInquiry.id}
                   </div>
-                  <p style={{ color: '#475569', fontSize: '1.02rem', marginBottom: '2rem', lineHeight: '1.7' }}>
-                    Thank you, <strong>{submittedInquiry.name}</strong>. Our institutional representative will review your request for <strong>{submittedInquiry.org || 'your institution'}</strong> and contact you within 24 business hours.
+                  <p style={{ color: '#475569', fontSize: '1.02rem', marginBottom: '1.8rem', lineHeight: '1.7' }}>
+                    Thank you, <strong>{submittedInquiry.name}</strong>. Your inquiry has been forwarded directly to{' '}
+                    <strong style={{ color: 'var(--color-primary)' }}>{BRAND_INFO.email}</strong>. Our institutional representative will review your request for <strong>{submittedInquiry.org || 'your institution'}</strong> and contact you within 24 business hours.
                   </p>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '380px', margin: '0 auto' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '380px', margin: '0 auto' }}>
+                    <a
+                      href={generateMailtoUrl()}
+                      className="btn"
+                      style={{ backgroundColor: 'var(--color-secondary)', color: '#ffffff', width: '100%' }}
+                    >
+                      <Mail size={18} />
+                      Send Direct Email ({BRAND_INFO.email})
+                    </a>
+
                     <a
                       href={generateWhatsAppUrl()}
                       target="_blank"
@@ -412,7 +457,7 @@ export default function ContactPage() {
                     style={{ width: '100%', marginTop: '0.8rem' }}
                   >
                     {loading ? (
-                      'Processing Your Request...'
+                      `Dispatching to ${BRAND_INFO.email}...`
                     ) : (
                       <>
                         <Send size={18} />
@@ -423,7 +468,7 @@ export default function ContactPage() {
 
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '1.2rem', fontSize: '0.82rem', color: '#64748b' }}>
                     <ShieldCheck size={16} style={{ color: '#16a34a' }} />
-                    <span>Your contact details are strictly confidential. No spam guaranteed.</span>
+                    <span>Inquiries delivered directly to <strong>{BRAND_INFO.email}</strong>. No spam guaranteed.</span>
                   </div>
                 </form>
               )}
