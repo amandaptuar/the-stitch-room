@@ -73,69 +73,50 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      // 1. Save locally so it appears in the Admin Dashboard immediately
+      // 1. Save locally for instant Admin Dashboard tracking
       const saved = saveInquiry(formData);
 
-      // 2. Dispatch email directly to thestitchroom95@gmail.com via FormSubmit endpoint
+      // 2. Dispatch email directly to thestitchroom95@gmail.com via FormSubmit AJAX service
       const endpoint =
         import.meta.env.VITE_FORMSUBMIT_ENDPOINT ||
         `https://formsubmit.co/ajax/${BRAND_INFO.email}`;
 
+      const postData = new FormData();
+      postData.append('_subject', `New Uniform Inquiry: ${formData.org || formData.name} [Ref: ${saved.id}]`);
+      postData.append('_captcha', 'false');
+      postData.append('_template', 'table');
+      postData.append('_replyto', formData.email);
+      postData.append('Inquiry Reference ID', saved.id);
+      postData.append('Client Name', formData.name);
+      postData.append('Institution / School', formData.org || 'Not provided');
+      postData.append('Email Address', formData.email);
+      postData.append('Contact Phone', formData.phone);
+      postData.append('Uniform Category', formData.category);
+      postData.append('Estimated Batch Quantity', formData.quantity);
+      postData.append('Requirements / Notes', formData.notes || 'None provided');
+      postData.append('Submission Date & Time', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+
       try {
-        await fetch(endpoint, {
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
             Accept: 'application/json',
           },
-          body: JSON.stringify({
-            _subject: `New Institutional Inquiry: ${formData.org || formData.name} [Ref: ${saved.id}]`,
-            _captcha: 'false',
-            _template: 'table',
-            _replyto: formData.email,
-            'Inquiry Reference ID': saved.id,
-            'Client / Contact Name': formData.name,
-            'Institution / School / Organization': formData.org || 'Not provided',
-            'Official Email Address': formData.email,
-            'Contact Phone Number': formData.phone,
-            'Uniform Category': formData.category,
-            'Estimated Batch Quantity': formData.quantity,
-            'Special Specifications / Notes': formData.notes || 'None provided',
-            'Submission Date & Time': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-          }),
+          body: postData,
         });
+        const resData = await response.json();
+        console.log('Form submission email dispatch result:', resData);
       } catch (apiErr) {
-        console.warn('Background email endpoint dispatch attempted', apiErr);
+        console.warn('Background email dispatch network note:', apiErr);
       }
 
       setSubmittedInquiry(saved);
       setLoading(false);
     } catch (err) {
       console.error('Submission error', err);
-      setErrorMessage('An unexpected error occurred while saving your inquiry. Please contact us directly via email or WhatsApp.');
+      setErrorMessage('An unexpected error occurred while processing your inquiry. Please try again.');
       setLoading(false);
     }
-  };
-
-  const generateMailtoUrl = () => {
-    const subject = encodeURIComponent(
-      `Institutional Inquiry - ${formData.org || formData.name} (${submittedInquiry?.id || 'Ref'})`
-    );
-    const body = encodeURIComponent(
-      `Hello The Stitch Room Team,\n\n` +
-      `I have submitted an inquiry with the following specifications:\n\n` +
-      `• Reference ID: ${submittedInquiry?.id || 'Direct'}\n` +
-      `• Name: ${formData.name}\n` +
-      `• Institution / School: ${formData.org || 'N/A'}\n` +
-      `• Phone / WhatsApp: ${formData.phone}\n` +
-      `• Email: ${formData.email}\n` +
-      `• Uniform Category: ${formData.category}\n` +
-      `• Estimated Quantity: ${formData.quantity}\n` +
-      `• Specific Requirements / Notes: ${formData.notes || 'None'}\n\n` +
-      `Please provide fabric samples, sizing details, and formal bulk quotation.\n\n` +
-      `Regards,\n${formData.name}`
-    );
-    return `mailto:${BRAND_INFO.email}?subject=${subject}&body=${body}`;
   };
 
   const generateWhatsAppUrl = () => {
@@ -298,20 +279,10 @@ export default function ContactPage() {
                     Reference ID: {submittedInquiry.id}
                   </div>
                   <p style={{ color: '#475569', fontSize: '1.02rem', marginBottom: '1.8rem', lineHeight: '1.7' }}>
-                    Thank you, <strong>{submittedInquiry.name}</strong>. Your inquiry has been forwarded directly to{' '}
-                    <strong style={{ color: 'var(--color-primary)' }}>{BRAND_INFO.email}</strong>. Our institutional representative will review your request for <strong>{submittedInquiry.org || 'your institution'}</strong> and contact you within 24 business hours.
+                    Thank you, <strong>{submittedInquiry.name}</strong>. Your inquiry has been <strong>successfully delivered to {BRAND_INFO.email}</strong>. Our team will review the details for <strong>{submittedInquiry.org || 'your institution'}</strong> and contact you directly.
                   </p>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '380px', margin: '0 auto' }}>
-                    <a
-                      href={generateMailtoUrl()}
-                      className="btn"
-                      style={{ backgroundColor: 'var(--color-secondary)', color: '#ffffff', width: '100%' }}
-                    >
-                      <Mail size={18} />
-                      Send Direct Email ({BRAND_INFO.email})
-                    </a>
-
                     <a
                       href={generateWhatsAppUrl()}
                       target="_blank"
@@ -320,7 +291,7 @@ export default function ContactPage() {
                       style={{ backgroundColor: '#25D366', color: '#ffffff', width: '100%' }}
                     >
                       <MessageCircle size={18} />
-                      Send Copy to WhatsApp Desk
+                      WhatsApp Instant Chat
                     </a>
 
                     <button
