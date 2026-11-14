@@ -773,6 +773,108 @@ img {
   margin-top: 0.25rem;
 }
 
+/* Page Hero Banners with Background Image */
+.page-hero-banner {
+  position: relative;
+  padding: 5rem 0 4.2rem;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(229, 223, 213, 0.2);
+  text-align: center;
+  overflow: hidden;
+}
+
+.page-hero-banner h1 {
+  color: #ffffff;
+}
+
+/* Uniform Lines Modern Showcase */
+.uniform-lines-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.uniform-line-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.uniform-line-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(201, 117, 80, 0.16);
+  border-color: rgba(201, 117, 80, 0.4);
+}
+
+.uniform-line-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background-color: #0f172a;
+}
+
+.uniform-line-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.uniform-line-card:hover .uniform-line-img {
+  transform: scale(1.06);
+}
+
+.card-floating-badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(201, 117, 80, 0.5);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.uniform-spec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--bg-page);
+  border: 1px solid var(--border-color);
+  color: #334155;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+  .uniform-lines-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Category Cards */
 .cards-grid {
   display: grid;
@@ -943,13 +1045,38 @@ img {
   border-bottom: none;
 }
 
+/* Contact Page Layout — Equal Height Columns */
+.contact-page-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.contact-info-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  padding: 2.2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 /* Form Styles */
 .form-card {
   background: #ffffff;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-lg);
-  padding: 2.5rem;
+  padding: 2.2rem 2.4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .form-group {
@@ -1153,6 +1280,272 @@ img {
   flex: 1;
 }
 
+/* ==========================================================================
+   B2B BULK INSTITUTIONAL SUPPLY BANNER (Homepage)
+   ========================================================================== */
+.b2b-cta-card {
+  background: radial-gradient(circle at 10% 20%, rgba(201, 117, 80, 0.16) 0%, transparent 45%), linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(201, 117, 80, 0.28);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  align-items: stretch;
+  position: relative;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.b2b-cta-card:hover {
+  border-color: rgba(201, 117, 80, 0.45);
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45), 0 0 30px rgba(201, 117, 80, 0.15);
+}
+
+.b2b-cta-content {
+  padding: 3.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.b2b-cta-btns {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.b2b-cta-img-wrap {
+  position: relative;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  background: #0b1120;
+}
+
+.b2b-cta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.b2b-cta-card:hover .b2b-cta-img {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   HORIZONTAL SCROLLERS & INTERACTIVE SHOWCASE (About Us & Clients Pages)
+   ========================================================================== */
+.page-hero-stats-pill {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.horizontal-scroll-track {
+  display: flex;
+  gap: 1.4rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0.6rem 0.2rem 1.4rem;
+}
+.horizontal-scroll-track::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-nav-group {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.scroll-nav-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--color-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+.scroll-nav-btn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(201, 117, 80, 0.35);
+}
+
+/* Timeline Cards */
+.timeline-card {
+  min-width: 310px;
+  max-width: 320px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+.timeline-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 28px rgba(201, 117, 80, 0.14);
+}
+.timeline-year-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+/* Craftsmanship Spec Cards */
+.craft-card {
+  min-width: 295px;
+  max-width: 305px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: all var(--transition-fast);
+}
+.craft-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 117, 80, 0.5);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* Featured Client Cards in Scroller */
+.featured-client-card {
+  min-width: 325px;
+  max-width: 335px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 1.8rem;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+.featured-client-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, #f97316 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.featured-client-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201, 117, 80, 0.45);
+  box-shadow: 0 16px 36px rgba(201, 117, 80, 0.15);
+}
+.featured-client-card:hover::before {
+  opacity: 1;
+}
+
+/* Filter Pills Track */
+.filter-pills-track {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.3rem 0.2rem;
+}
+.filter-pills-track::-webkit-scrollbar {
+  display: none;
+}
+.filter-chip {
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--color-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.filter-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.filter-chip.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 3px 10px rgba(201, 117, 80, 0.3);
+}
+
+/* Testimonial Luxury Scroller Cards */
+.testimonial-luxury-card {
+  min-width: 340px;
+  max-width: 360px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+.testimonial-luxury-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 117, 80, 0.4);
+  box-shadow: 0 12px 30px rgba(201, 117, 80, 0.12);
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
   .hero-grid {
@@ -1161,6 +1554,24 @@ img {
   }
   .studio-layout {
     grid-template-columns: 1fr;
+  }
+  .contact-page-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .contact-info-card,
+  .form-card {
+    height: auto;
+  }
+  .b2b-cta-card {
+    grid-template-columns: 1fr;
+  }
+  .b2b-cta-content {
+    padding: 2.8rem 2rem;
+  }
+  .b2b-cta-img-wrap {
+    min-height: 300px;
+    max-height: 360px;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -1376,6 +1787,99 @@ img {
     margin-top: 0.2rem !important;
   }
 
+  /* Page Hero Banners on Mobile */
+  .page-hero-banner,
+  section.page-hero-banner,
+  main > section.page-hero-banner:first-of-type {
+    padding-top: 2rem !important;
+    padding-bottom: 2.6rem !important;
+  }
+  .page-hero-banner h1 {
+    font-size: 1.85rem !important;
+    line-height: 1.25 !important;
+  }
+  .page-hero-banner p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Uniform Lines on Mobile (Smooth swipe track) */
+  .uniform-lines-grid {
+    display: flex !important;
+    gap: 1rem !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 0.4rem 0.2rem 1rem !important;
+  }
+  .uniform-lines-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .uniform-line-card {
+    min-width: 285px !important;
+    max-width: 295px !important;
+    scroll-snap-align: start !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* B2B Institutional Supply Card on Mobile */
+  .b2b-cta-card {
+    grid-template-columns: 1fr !important;
+    border-radius: 18px !important;
+  }
+  .b2b-cta-content {
+    padding: 2.2rem 1.3rem !important;
+  }
+  .b2b-cta-btns {
+    flex-direction: column !important;
+    gap: 0.85rem !important;
+    width: 100% !important;
+  }
+  .b2b-cta-btns .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .b2b-cta-img-wrap {
+    min-height: 230px !important;
+    max-height: 260px !important;
+  }
+
+  /* Scroller cards on mobile */
+  .timeline-card {
+    min-width: 270px !important;
+    max-width: 280px !important;
+    padding: 1.4rem !important;
+  }
+  .craft-card {
+    min-width: 260px !important;
+    max-width: 270px !important;
+    padding: 1.4rem !important;
+  }
+  .featured-client-card {
+    min-width: 280px !important;
+    max-width: 290px !important;
+    padding: 1.4rem !important;
+  }
+  .testimonial-luxury-card {
+    min-width: 285px !important;
+    max-width: 295px !important;
+    padding: 1.5rem !important;
+  }
+
+  .page-hero-stats-pill {
+    border-radius: 14px !important;
+    padding: 0.7rem 0.9rem !important;
+    gap: 0.4rem 0.75rem !important;
+    width: 100% !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Hide < > scroller navigation buttons on mobile */
+  .scroll-nav-btn,
+  .scroll-nav-group {
+    display: none !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1395,8 +1899,9 @@ img {
   .admin-content {
     padding: 1.2rem 0.8rem;
   }
+  .contact-info-card,
   .form-card {
-    padding: 1.5rem 1.2rem;
+    padding: 1.6rem 1.2rem !important;
   }
 }
 

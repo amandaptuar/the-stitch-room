@@ -53,6 +53,8 @@ export default function App() {
         <Route path="/modules" element={<PublicLayout><UniformsPage /></PublicLayout>} />
         <Route path="/clients" element={<PublicLayout><ClientsPage /></PublicLayout>} />
         <Route path="/3d-showroom" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
+        <Route path="/3d-customizer" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
+        <Route path="/customizer" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
         <Route path="/customer-portal" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
         <Route path="/customer-dashboard" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />

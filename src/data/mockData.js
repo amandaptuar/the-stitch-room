@@ -222,7 +222,8 @@ export const INITIAL_SCHOOLS = [
     category: "ICSE / Cambridge",
     established: 2004,
     colors: ["#c97550", "#fef3c7", "#0f172a"],
-    status: "Active Partner"
+    status: "Active Partner",
+    yearsPartner: "12+ Years"
   },
   {
     id: 6,
@@ -234,7 +235,47 @@ export const INITIAL_SCHOOLS = [
     category: "Matriculation",
     established: 1998,
     colors: ["#064e3b", "#fef3c7", "#ffffff"],
-    status: "Active Partner"
+    status: "Active Partner",
+    yearsPartner: "8+ Years"
+  },
+  {
+    id: 7,
+    name: "Auxilium Higher Secondary School",
+    city: "Katpadi, Vellore",
+    district: "Vellore",
+    students: 1650,
+    uniformType: "Navy Pleated Pinafore + White Poly-Cotton Poplin Shirt",
+    category: "State Board / ICSE",
+    established: 1978,
+    colors: ["#1e3a8a", "#ffffff", "#94a3b8"],
+    status: "Active Partner",
+    yearsPartner: "15+ Years"
+  },
+  {
+    id: 8,
+    name: "Kingston Engineering & Tech Campus",
+    city: "Ranipet / Vellore",
+    district: "Ranipet",
+    students: 1100,
+    uniformType: "Charcoal Grey Tailored Blazer + Oxford White Shirt",
+    category: "Higher Education / College",
+    established: 2002,
+    colors: ["#334155", "#e2e8f0", "#c97550"],
+    status: "Active Partner",
+    yearsPartner: "9+ Years"
+  },
+  {
+    id: 9,
+    name: "Bhavan's Vidya Mandir",
+    city: "Chennai",
+    district: "Chennai",
+    students: 1350,
+    uniformType: "Crimson & Beige Plaid Skirt + Khaki Twill Trousers",
+    category: "CBSE",
+    established: 1991,
+    colors: ["#991b1b", "#d97706", "#fef3c7"],
+    status: "Active Partner",
+    yearsPartner: "11+ Years"
   }
 ];
 

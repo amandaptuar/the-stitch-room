@@ -17,10 +17,10 @@ import {
   MessageCircle,
   Quote,
   Star,
-  Check
+  Check,
+  Phone
 } from 'lucide-react';
 import MarqueeRibbon from '../components/MarqueeRibbon';
-import FeaturedCarousel from '../components/FeaturedCarousel';
 import {
   BRAND_INFO,
   UNIFORM_CATEGORIES,
@@ -60,22 +60,12 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.div
-              className="hero-badge-pill"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              <Sparkles size={14} style={{ color: 'var(--color-primary)' }} />
-              <span>EST. 1995 • SOUTH INDIA'S TRUSTED TEXTILE MAKER</span>
-            </motion.div>
-
             <h1 className="hero-headline">
               Precision Crafted <span className="hero-gradient-text">Institutional Uniforms</span> Built To Endure.
             </h1>
 
             <p className="hero-subtext">
-              Outfitting over 150+ leading schools, hospitals, and corporate organizations across South India with certified pre-shrunk fabrics, Japanese Tajima automated crest embroidery, and guaranteed on-time reopening dispatch.
+              Certified pre-shrunk fabrics, precision Tajima crest embroidery, and guaranteed on-time reopening dispatch for schools, hospitals, and corporate organizations.
             </p>
 
             <div className="hero-cta-group">
@@ -90,25 +80,21 @@ export default function HomePage() {
             </div>
 
             {/* Quick Micro-Trust Tag */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.6rem', fontSize: '0.85rem', color: '#475569' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.4rem', fontSize: '0.85rem', color: '#475569' }}>
               <div style={{ display: 'flex', color: '#f59e0b' }}>
                 {'★'.repeat(5)}
               </div>
-              <span><strong>4.9 / 5</strong> rating from 150+ institutional leadership teams</span>
+              <span><strong>4.9 / 5</strong> rating from 150+ institutional partners</span>
             </div>
 
             <div className="hero-trust-badges">
               <div className="trust-item">
                 <ShieldCheck size={20} style={{ color: 'var(--color-primary)' }} />
-                <span>Zero Bleed Reactive Dye</span>
+                <span>Pre-Shrunk Vat-Dyed Fabric</span>
               </div>
               <div className="trust-item">
                 <Clock size={20} style={{ color: 'var(--color-primary)' }} />
                 <span>On-Time Reopening Guarantee</span>
-              </div>
-              <div className="trust-item">
-                <Award size={20} style={{ color: 'var(--color-primary)' }} />
-                <span>150+ Institutional Partners</span>
               </div>
             </div>
           </motion.div>
@@ -193,84 +179,89 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          HORIZONTAL SCROLLER: ENGINEERED SPECIALLY FOR EVERY SECTOR
-          (Clean swipe track with no <> buttons)
+          OUR UNIFORM LINES — LUXURY MODERN SHOWCASE
          ========================================================================= */}
       <section style={{ padding: '4.5rem 0', background: 'var(--bg-page)' }}>
         <div className="container">
           {/* Header Row */}
-          <div className="section-header-row">
+          <div className="section-header-row" style={{ marginBottom: '2.5rem' }}>
             <div className="section-header-left">
-              <div className="badge-tag">Our Uniform Lines</div>
+              <div className="badge-tag" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                <Layers size={13} style={{ color: 'var(--color-primary)' }} />
+                <span>Our Uniform Lines • 4 Specialized Sectors</span>
+              </div>
               <h2 className="section-title" style={{ margin: '0.4rem 0 0.6rem' }}>
-                Engineered Specially For Every Sector
+                Engineered Specially For Every Institutional Sector
               </h2>
-              <p className="section-desc" style={{ margin: 0 }}>
-                Swipe horizontally to browse our tailored fabric weaves and reinforced construction specs.
+              <p className="section-desc" style={{ margin: 0, maxWidth: '620px' }}>
+                Heavy-duty fabric blends, reinforced seam architecture, and computerized Tajima crest embroidery built to withstand daily institutional wear.
               </p>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <span className="badge-tag" style={{ margin: 0, background: '#ffffff', border: '1px solid var(--border-color)', color: 'var(--color-primary)', fontSize: '0.78rem' }}>
-                ← Swipe to explore categories →
+                ← Swipe to browse all 4 lines →
               </span>
             </div>
           </div>
 
-          {/* Horizontal Scroll Track */}
-          <div className="horizontal-scroll-track" ref={sectorScrollRef}>
+          {/* Luxury Responsive Uniform Lines Grid / Scroller */}
+          <div className="uniform-lines-grid" ref={sectorScrollRef}>
             {UNIFORM_CATEGORIES.map((cat, idx) => (
               <motion.div
                 key={cat.id}
-                className="horizontal-card-item category-card"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="uniform-line-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                style={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
               >
-                <div className="card-img-wrap" style={{ height: '190px' }}>
-                  <img src={cat.image} alt={cat.title} className="card-img" />
-                  <div className="card-tag">{cat.tag}</div>
+                <div className="uniform-line-img-wrap">
+                  <img src={cat.image} alt={cat.title} className="uniform-line-img" />
+                  <div className="card-floating-badge">{cat.tag}</div>
                 </div>
 
-                <div className="card-body" style={{ padding: '1.4rem' }}>
-                  <h3 className="card-title" style={{ fontSize: '1.25rem' }}>{cat.title}</h3>
-                  <p className="card-desc" style={{ fontSize: '0.9rem', marginBottom: '1rem', lineHeight: '1.6' }}>
+                <div style={{ padding: '1.4rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <h3 style={{ fontSize: '1.22rem', fontWeight: 800, fontFamily: 'var(--font-heading)', color: 'var(--color-secondary)', marginBottom: '0.5rem', lineHeight: 1.25 }}>
+                    {cat.title}
+                  </h3>
+                  <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.1rem', lineHeight: '1.6', flex: '1 0 auto' }}>
                     {cat.desc}
                   </p>
                   
-                  <ul className="card-specs-list" style={{ marginBottom: '1.2rem', gap: '0.35rem' }}>
-                    {cat.specs.slice(0, 3).map((spec, sIdx) => (
-                      <li key={sIdx} className="spec-item" style={{ fontSize: '0.82rem' }}>
-                        <CheckCircle2 size={14} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                  {/* Key Fabric Spec Chips */}
+                  <div className="uniform-spec-chips">
+                    {cat.specs.slice(0, 2).map((spec, sIdx) => (
+                      <span key={sIdx} className="spec-chip">
+                        <Check size={12} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
                         <span>{spec}</span>
-                      </li>
+                      </span>
                     ))}
-                  </ul>
+                  </div>
 
-                  <Link to={`/uniforms#${cat.id}`} className="btn btn-outline btn-sm" style={{ marginTop: 'auto', width: '100%' }}>
-                    View Technical Details
-                  </Link>
+                  {/* Dual Action Buttons */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginTop: 'auto' }}>
+                    <Link
+                      to={`/3d-showroom?category=${cat.id}`}
+                      className="btn btn-primary btn-sm"
+                      style={{ width: '100%' }}
+                    >
+                      <Scissors size={14} />
+                      Customize in 3D Studio
+                    </Link>
+                    <Link
+                      to={`/contact?category=${cat.id}`}
+                      className="btn btn-outline btn-sm"
+                      style={{ width: '100%', borderColor: 'var(--border-color)' }}
+                    >
+                      Get Bulk Quote
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* AUTOMATED FEATURED CAROUSEL (No <> buttons) */}
-      <section style={{ padding: '4.5rem 0', background: '#ffffff', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
-        <div className="container">
-          <div className="section-header">
-            <div className="badge-tag">Interactive Catalog</div>
-            <h2 className="section-title">Explore Featured Collections & Specs</h2>
-            <p className="section-desc">
-              Automatic showcase with touch gestures, instant fabric swatches, and quote links.
-            </p>
-          </div>
-
-          <FeaturedCarousel />
         </div>
       </section>
 
@@ -420,53 +411,123 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* B2B BULK PARTNERSHIP BANNER */}
-      <section style={{ padding: '4.5rem 0', background: 'var(--bg-page)' }}>
+      {/* B2B BULK PARTNERSHIP BANNER — LUXURY REDESIGN */}
+      <section style={{ padding: '5rem 0', background: 'var(--bg-page)' }}>
         <div className="container">
-          <div
-            style={{
-              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-              borderRadius: 'var(--radius-lg)',
-              overflow: 'hidden',
-              boxShadow: 'var(--shadow-lg)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              alignItems: 'center',
-            }}
-          >
-            <div style={{ padding: '2.5rem' }}>
-              <div className="badge-tag" style={{ backgroundColor: 'rgba(201, 117, 80, 0.25)', color: '#ffffff' }}>
-                Bulk Institutional Supply
+          <div className="b2b-cta-card">
+            {/* Left Content */}
+            <div className="b2b-cta-content">
+              <div
+                className="badge-tag"
+                style={{
+                  backgroundColor: 'rgba(201, 117, 80, 0.25)',
+                  color: '#fbeee8',
+                  borderColor: 'rgba(201, 117, 80, 0.6)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  marginBottom: '1.2rem',
+                }}
+              >
+                <Sparkles size={13} style={{ color: 'var(--color-primary)' }} />
+                <span>Bulk Institutional Supply</span>
               </div>
-              <h2 style={{ color: '#ffffff', fontSize: '2rem', marginBottom: '1rem', lineHeight: '1.2' }}>
-                Planning Uniforms for Next Academic Year?
+
+              <h2 style={{ color: '#ffffff', fontSize: 'clamp(1.9rem, 2.8vw + 0.8rem, 2.6rem)', fontWeight: 800, marginBottom: '1.1rem', lineHeight: 1.2, fontFamily: 'var(--font-heading)' }}>
+                Planning Uniforms for{' '}
+                <span style={{ background: 'linear-gradient(135deg, #c97550 0%, #f97316 50%, #e0a96d 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  Next Academic Year?
+                </span>
               </h2>
-              <p style={{ color: '#cbd5e1', fontSize: '0.98rem', marginBottom: '1.8rem', lineHeight: '1.6' }}>
+
+              <p style={{ color: '#cbd5e1', fontSize: '1rem', marginBottom: '1.8rem', lineHeight: 1.7, maxWidth: '520px' }}>
                 Book our master tailor campus sizing camp early. We prepare customized physical sample kits for your management committee with zero obligation.
               </p>
-              <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
-                <Link to="/contact" className="btn btn-primary btn-sm" style={{ flex: '1 1 200px' }}>
+
+              {/* Institutional Benefit Checklist */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '0.8rem', marginBottom: '2.2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: '#e2e8f0', fontSize: '0.88rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22c55e', flexShrink: 0 }} />
+                  <span>Free Physical Sample Kits</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: '#e2e8f0', fontSize: '0.88rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22c55e', flexShrink: 0 }} />
+                  <span>On-Campus Tailor Sizing Camps</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: '#e2e8f0', fontSize: '0.88rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22c55e', flexShrink: 0 }} />
+                  <span>Zero Quality Recall Guarantee</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: '#e2e8f0', fontSize: '0.88rem' }}>
+                  <CheckCircle2 size={16} style={{ color: '#22c55e', flexShrink: 0 }} />
+                  <span>On-Time Reopening Dispatch</span>
+                </div>
+              </div>
+
+              {/* CTA Action Buttons */}
+              <div className="b2b-cta-btns">
+                <Link
+                  to="/contact"
+                  className="btn btn-primary btn-lg"
+                  style={{ boxShadow: '0 6px 20px rgba(201, 117, 80, 0.45)', padding: '0.85rem 1.6rem' }}
+                >
                   Schedule Consultation
-                  <ArrowRight size={16} />
+                  <ArrowRight size={18} />
                 </Link>
                 <a
                   href={`tel:${BRAND_INFO.phone1}`}
-                  className="btn btn-outline btn-sm"
-                  style={{ color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.2)', flex: '1 1 200px' }}
+                  className="btn btn-outline btn-lg"
+                  style={{
+                    color: '#ffffff',
+                    borderColor: 'rgba(255, 255, 255, 0.25)',
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    padding: '0.85rem 1.6rem',
+                  }}
                 >
+                  <Phone size={17} style={{ color: 'var(--color-primary)' }} />
                   Call +91 78128 79053
                 </a>
               </div>
             </div>
-            <div style={{ height: '100%', minHeight: '260px', position: 'relative' }}>
+
+            {/* Right Showcase Image Card */}
+            <div className="b2b-cta-img-wrap">
               <img
-                src="/b2b.png"
-                alt="B2B Bulk Garment Manufacturing"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                src="/b2b-showcase.jpg"
+                alt="The Stitch Room Bulk Institutional Manufacturing"
+                className="b2b-cta-img"
                 onError={(e) => {
-                  e.currentTarget.src = '/assets/images/corporate-uniform.jpg';
+                  e.currentTarget.src = '/b2b.png';
                 }}
               />
+              {/* Floating Quality Badge */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '1.2rem',
+                  left: '1.2rem',
+                  right: '1.2rem',
+                  background: 'rgba(15, 23, 42, 0.88)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '0.9rem 1.2rem',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(201, 117, 80, 0.4)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+                }}
+              >
+                <Award size={26} style={{ color: 'var(--color-accent-gold)', flexShrink: 0 }} />
+                <div>
+                  <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.9rem' }}>
+                    Annual Institutional Partner Desk
+                  </div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.78rem' }}>
+                    Direct bulk factory pricing & zero-defect dispatch
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { INITIAL_INQUIRIES, INITIAL_SCHOOLS } from '../data/mockData';
 
 const STORAGE_KEYS = {
   INQUIRIES: 'tsr_inquiries_v2',
-  SCHOOLS: 'tsr_schools_v2',
+  SCHOOLS: 'tsr_schools_v3',
   ADMIN_AUTH: 'tsr_admin_session_v2',
 };
 

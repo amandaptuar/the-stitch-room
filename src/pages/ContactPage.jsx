@@ -109,95 +109,125 @@ export default function ContactPage() {
   };
 
   return (
-    <main style={{ paddingBottom: '5rem' }}>
-      {/* HEADER HERO */}
-      <section style={{ padding: '4.5rem 0 3.5rem', background: 'var(--bg-muted)', borderBottom: '1px solid var(--border-color)' }}>
-        <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
-          <div className="badge-tag">Direct Institutional Consultation</div>
-          <h1 style={{ marginBottom: '1.2rem' }}>
+    <main style={{ paddingBottom: '1.5rem' }}>
+      {/* HEADER HERO WITH LUXURY CONSULTATION STUDIO BACKGROUND */}
+      <section
+        className="page-hero-banner"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.85)), url(/contact-hero-bg.jpg)',
+        }}
+      >
+        <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '840px' }}>
+          <div
+            className="badge-tag"
+            style={{
+              background: 'rgba(201, 117, 80, 0.25)',
+              color: '#fbeee8',
+              borderColor: 'rgba(201, 117, 80, 0.6)',
+              marginBottom: '1rem',
+            }}
+          >
+            Direct Institutional Consultation
+          </div>
+          <h1 style={{ color: '#ffffff', fontSize: 'clamp(2rem, 3.5vw + 1rem, 3rem)', fontWeight: 800, marginBottom: '1.2rem', lineHeight: 1.18 }}>
             Get in Touch With Our Master Tailoring Workshop
           </h1>
-          <p style={{ fontSize: '1.15rem' }}>
+          <p style={{ fontSize: '1.12rem', color: '#cbd5e1', lineHeight: 1.7, margin: '0 auto' }}>
             Request physical sample swatches, schedule on-campus student measurement camps, or receive an official institutional bulk quotation.
           </p>
         </div>
       </section>
 
-      {/* MAIN CONTACT LAYOUT */}
-      <section style={{ padding: '4.5rem 0' }}>
+      {/* MAIN CONTACT LAYOUT — EQUAL HEIGHT COLUMNS */}
+      <section style={{ paddingTop: '3.5rem', paddingBottom: '2.5rem' }}>
         <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '3.5rem',
-              alignItems: 'start',
-            }}
-          >
-            {/* Left: Contact Info Cards */}
-            <div>
-              <div className="badge-tag">Factory Workshop & Office</div>
-              <h2 style={{ marginBottom: '1.2rem' }}>Katpadi, Vellore, Tamil Nadu</h2>
-              <p style={{ marginBottom: '2rem', lineHeight: '1.7' }}>
-                We welcome institution management committees and procurement officers to inspect our fabrics and cutting operations in person.
-              </p>
+          <div className="contact-page-layout">
+            {/* Left: Contact Info Card (Equal Height to Form) */}
+            <div className="contact-info-card">
+              <div>
+                <div className="badge-tag" style={{ marginBottom: '0.8rem' }}>Factory Workshop & Office</div>
+                <h2 style={{ fontSize: 'clamp(1.6rem, 2vw + 0.6rem, 2rem)', marginBottom: '0.8rem', color: 'var(--color-secondary)' }}>
+                  Katpadi, Vellore, Tamil Nadu
+                </h2>
+                <p style={{ marginBottom: '1.8rem', lineHeight: '1.7', color: '#64748b' }}>
+                  We welcome institution management committees and procurement officers to inspect our fabrics, tailoring floors, and automated Tajima embroidery machines in person.
+                </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem', marginBottom: '2.5rem' }}>
-                <div style={{ display: 'flex', gap: '1rem', background: '#ffffff', padding: '1.4rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <MapPin size={24} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.3rem' }}>Address</h4>
-                    <p style={{ fontSize: '0.92rem', margin: 0 }}>{BRAND_INFO.address}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: 0 }}>
+                  <div style={{ display: 'flex', gap: '1rem', background: 'var(--bg-page)', padding: '1.1rem 1.3rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <MapPin size={22} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontSize: '0.98rem', marginBottom: '0.25rem', color: 'var(--color-secondary)' }}>Master Atelier Address</h4>
+                      <p style={{ fontSize: '0.88rem', margin: 0, color: '#64748b', lineHeight: 1.5 }}>{BRAND_INFO.address}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div style={{ display: 'flex', gap: '1rem', background: '#ffffff', padding: '1.4rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <Phone size={24} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.3rem' }}>Direct Calling Lines</h4>
-                    <p style={{ fontSize: '0.92rem', margin: 0 }}>
-                      <a href={`tel:${BRAND_INFO.phone1}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.phone1}</a> / <a href={`tel:${BRAND_INFO.phone2}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.phone2}</a>
-                    </p>
+                  <div style={{ display: 'flex', gap: '1rem', background: 'var(--bg-page)', padding: '1.1rem 1.3rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <Phone size={22} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontSize: '0.98rem', marginBottom: '0.25rem', color: 'var(--color-secondary)' }}>Direct Calling Lines</h4>
+                      <p style={{ fontSize: '0.88rem', margin: 0, color: '#64748b', lineHeight: 1.5 }}>
+                        <a href={`tel:${BRAND_INFO.phone1}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.phone1}</a> / <a href={`tel:${BRAND_INFO.phone2}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.phone2}</a>
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div style={{ display: 'flex', gap: '1rem', background: '#ffffff', padding: '1.4rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <Mail size={24} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.3rem' }}>Official Inquiries Email</h4>
-                    <p style={{ fontSize: '0.92rem', margin: 0 }}>
-                      <a href={`mailto:${BRAND_INFO.email}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.email}</a>
-                    </p>
+                  <div style={{ display: 'flex', gap: '1rem', background: 'var(--bg-page)', padding: '1.1rem 1.3rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <Mail size={22} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontSize: '0.98rem', marginBottom: '0.25rem', color: 'var(--color-secondary)' }}>Official Institutional Desk</h4>
+                      <p style={{ fontSize: '0.88rem', margin: 0, color: '#64748b', lineHeight: 1.5 }}>
+                        <a href={`mailto:${BRAND_INFO.email}`} style={{ color: 'var(--color-primary)', fontWeight: '600' }}>{BRAND_INFO.email}</a>
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div style={{ display: 'flex', gap: '1rem', background: '#ffffff', padding: '1.4rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <Clock size={24} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.3rem' }}>Operating Hours</h4>
-                    <p style={{ fontSize: '0.92rem', margin: 0 }}>{BRAND_INFO.workingHours}</p>
+                  <div style={{ display: 'flex', gap: '1rem', background: 'var(--bg-page)', padding: '1.1rem 1.3rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <Clock size={22} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontSize: '0.98rem', marginBottom: '0.25rem', color: 'var(--color-secondary)' }}>Operating & Sizing Hours</h4>
+                      <p style={{ fontSize: '0.88rem', margin: 0, color: '#64748b', lineHeight: 1.5 }}>{BRAND_INFO.workingHours}</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Direct WhatsApp Box */}
-              <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', padding: '1.8rem', borderRadius: 'var(--radius-md)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
-                  <MessageCircle size={24} style={{ color: '#16a34a' }} />
-                  <h4 style={{ color: '#166534', margin: 0 }}>Need an Immediate Response?</h4>
-                </div>
-                <p style={{ color: '#15803d', fontSize: '0.92rem', marginBottom: '1.2rem' }}>
-                  Chat directly with our master production manager on WhatsApp for fast turnarounds, urgent sampling, or custom orders.
-                </p>
-                <a
-                  href={`https://wa.me/${BRAND_INFO.whatsapp}?text=Hi%20The%20Stitch%20Room,%20I%20would%20like%20to%20discuss%20an%20urgent%20uniform%20requirement.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-sm"
-                  style={{ backgroundColor: '#25D366', color: '#ffffff' }}
+              {/* Institutional Assurance Badge at Bottom */}
+              <div
+                style={{
+                  background: 'var(--bg-page)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '12px',
+                  padding: '1.1rem 1.3rem',
+                  marginTop: '1.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
+                    background: 'var(--color-primary-light)',
+                    color: 'var(--color-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
                 >
-                  Open WhatsApp Chat
-                </a>
+                  <ShieldCheck size={20} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--color-secondary)' }}>
+                    Sample Swatch Delivery Within 48 Hours
+                  </div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '0.15rem' }}>
+                    Physical sample kits dispatched across Tamil Nadu with zero obligation.
+                  </div>
+                </div>
               </div>
             </div>
 
