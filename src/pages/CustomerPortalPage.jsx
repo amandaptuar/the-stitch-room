@@ -20,7 +20,7 @@ export default function CustomerPortalPage() {
   const sampleOrders = {
     'TSR-2026-881': {
       id: 'TSR-2026-881',
-      institution: "St. Joseph's Higher Secondary School, Chennai",
+      institution: "Vidyaniketan School, Vellore",
       batchSize: '850 Sets (Boys Trousers + Girls Pleated Skirts + Sky Blue Shirts)',
       status: 'In Production (Tajima Crest Embroidery)',
       progress: 65,

@@ -22,7 +22,7 @@ import { TESTIMONIALS, BRAND_INFO } from '../data/mockData';
 export default function ClientsPage() {
   const [schools, setSchools] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCity, setSelectedCity] = useState('All');
+  const [selectedFilter, setSelectedFilter] = useState('All');
 
   const testimonialsRef = useRef(null);
 
@@ -36,7 +36,7 @@ export default function ClientsPage() {
     setSchools(getSchools());
   }, []);
 
-  const cities = ['All', 'Vellore', 'Chennai', 'Coimbatore', 'Madurai', 'Salem', 'Trichy', 'Ranipet'];
+  const filterOptions = ['All', 'CBSE', 'ICSE', 'Matriculation', 'Kindergarten', 'International'];
 
   const filtered = schools.filter((s) => {
     const q = searchTerm.toLowerCase();
@@ -46,10 +46,12 @@ export default function ClientsPage() {
       (s.category && s.category.toLowerCase().includes(q)) ||
       (s.uniformType && s.uniformType.toLowerCase().includes(q));
 
-    const matchesCity =
-      selectedCity === 'All' || s.city.toLowerCase().includes(selectedCity.toLowerCase());
+    const matchesFilter =
+      selectedFilter === 'All' ||
+      (s.category && s.category.toLowerCase().includes(selectedFilter.toLowerCase())) ||
+      (s.city && s.city.toLowerCase().includes(selectedFilter.toLowerCase()));
 
-    return matchesSearch && matchesCity;
+    return matchesSearch && matchesFilter;
   });
 
   return (
@@ -146,9 +148,9 @@ export default function ClientsPage() {
               <span style={{ fontSize: '0.88rem', color: '#64748b' }}>
                 Showing <strong style={{ color: 'var(--color-secondary)' }}>{filtered.length}</strong> of {schools.length} institutions
               </span>
-              {(searchTerm || selectedCity !== 'All') && (
+              {(searchTerm || selectedFilter !== 'All') && (
                 <button
-                  onClick={() => { setSearchTerm(''); setSelectedCity('All'); }}
+                  onClick={() => { setSearchTerm(''); setSelectedFilter('All'); }}
                   style={{
                     background: 'none',
                     border: 'none',
@@ -165,15 +167,15 @@ export default function ClientsPage() {
             </div>
           </div>
 
-          {/* Horizontal Scrollable Region Filter Chips */}
+          {/* Horizontal Scrollable Category & Region Filter Chips */}
           <div className="filter-pills-track">
-            {cities.map((city) => (
+            {filterOptions.map((item) => (
               <button
-                key={city}
-                onClick={() => setSelectedCity(city)}
-                className={`filter-chip ${selectedCity === city ? 'active' : ''}`}
+                key={item}
+                onClick={() => setSelectedFilter(item)}
+                className={`filter-chip ${selectedFilter === item ? 'active' : ''}`}
               >
-                {city === 'All' ? 'All Partner Regions' : city}
+                {item === 'All' ? 'All Institutions' : item}
               </button>
             ))}
           </div>
@@ -191,7 +193,7 @@ export default function ClientsPage() {
                 Try adjusting your search query or selecting "All Partner Regions" above.
               </p>
               <button
-                onClick={() => { setSearchTerm(''); setSelectedCity('All'); }}
+                onClick={() => { setSearchTerm(''); setSelectedFilter('All'); }}
                 className="btn btn-primary btn-sm"
                 style={{ marginTop: '1.2rem' }}
               >
@@ -249,15 +251,38 @@ export default function ClientsPage() {
                       {school.name}
                     </h3>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748b', fontSize: '0.86rem', marginBottom: '1.1rem' }}>
-                      <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
-                      <span>{school.city}</span>
-                      {school.students && (
-                        <>
-                          <span style={{ margin: '0 0.2rem' }}>•</span>
-                          <Users size={14} />
-                          <span>~{school.students} Students</span>
-                        </>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '1.1rem', flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748b', fontSize: '0.86rem' }}>
+                        <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
+                        <span>{school.city}</span>
+                        {school.students && (
+                          <>
+                            <span style={{ margin: '0 0.2rem' }}>•</span>
+                            <Users size={14} />
+                            <span>~{school.students} Students</span>
+                          </>
+                        )}
+                      </div>
+
+                      {school.mapUrl && (
+                        <a
+                          href={school.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View campus location on Google Maps"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.3rem',
+                            color: 'var(--color-primary)',
+                            fontSize: '0.8rem',
+                            fontWeight: '700',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          <MapPin size={12} />
+                          <span>Google Maps ↗</span>
+                        </a>
                       )}
                     </div>
 

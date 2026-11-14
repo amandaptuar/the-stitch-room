@@ -545,11 +545,29 @@ export default function AboutPage() {
                   color: '#ffffff'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-primary)', fontSize: '0.82rem', fontWeight: '700' }}>
-                  <MapPin size={15} />
-                  <span>Katpadi, Vellore • Tamil Nadu</span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'var(--color-primary)', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <MapPin size={15} />
+                    <span>Katpadi, Vellore • Tamil Nadu</span>
+                  </div>
+                  <a
+                    href={BRAND_INFO.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: '#ffffff',
+                      textDecoration: 'none',
+                      background: 'rgba(201, 117, 80, 0.85)',
+                      padding: '0.2rem 0.6rem',
+                      borderRadius: '6px',
+                      fontSize: '0.75rem',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Google Maps ↗
+                  </a>
                 </div>
-                <div style={{ fontSize: '0.9rem', color: '#cbd5e1', marginTop: '0.3rem' }}>
+                <div style={{ fontSize: '0.9rem', color: '#cbd5e1', marginTop: '0.4rem' }}>
                   {BRAND_INFO.address}
                 </div>
               </div>

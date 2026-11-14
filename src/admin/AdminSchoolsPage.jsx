@@ -23,6 +23,7 @@ export default function AdminSchoolsPage() {
     category: 'Matriculation',
     students: 500,
     uniformType: '',
+    mapUrl: '',
     colors: '#1e3a8a, #bae6fd, #ffffff',
   });
 
@@ -38,6 +39,7 @@ export default function AdminSchoolsPage() {
       category: 'Matriculation',
       students: 500,
       uniformType: '',
+      mapUrl: '',
       colors: '#1e3a8a, #bae6fd, #ffffff',
     });
     setModalOpen(true);
@@ -51,6 +53,7 @@ export default function AdminSchoolsPage() {
       category: s.category || 'Matriculation',
       students: s.students || 500,
       uniformType: s.uniformType || '',
+      mapUrl: s.mapUrl || '',
       colors: s.colors ? s.colors.join(', ') : '#1e3a8a, #ffffff',
     });
     setModalOpen(true);
@@ -74,6 +77,7 @@ export default function AdminSchoolsPage() {
         category: form.category,
         students: Number(form.students),
         uniformType: form.uniformType,
+        mapUrl: form.mapUrl,
         colors: colorsArray,
       });
       setSchools(updated);
@@ -84,6 +88,7 @@ export default function AdminSchoolsPage() {
         category: form.category,
         students: Number(form.students),
         uniformType: form.uniformType,
+        mapUrl: form.mapUrl,
         colors: colorsArray,
       });
       setSchools(updated);
@@ -159,6 +164,11 @@ export default function AdminSchoolsPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
                     <span>{s.city}</span>
+                    {s.mapUrl && (
+                      <a href={s.mapUrl} target="_blank" rel="noreferrer" title="Open Google Maps" style={{ color: 'var(--color-primary)', marginLeft: '0.2rem', fontWeight: 'bold' }}>
+                        ↗
+                      </a>
+                    )}
                   </div>
                 </td>
                 <td style={{ padding: '1.1rem 1.4rem' }}>
@@ -294,6 +304,17 @@ export default function AdminSchoolsPage() {
                   value={form.uniformType}
                   onChange={(e) => setForm({ ...form, uniformType: e.target.value })}
                   placeholder="e.g. Navy Pleated Skirt / Trousers + Sky Blue Oxford Shirt"
+                  className="form-control"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Google Maps Link (Optional)</label>
+                <input
+                  type="url"
+                  value={form.mapUrl}
+                  onChange={(e) => setForm({ ...form, mapUrl: e.target.value })}
+                  placeholder="https://maps.app.goo.gl/..."
                   className="form-control"
                 />
               </div>

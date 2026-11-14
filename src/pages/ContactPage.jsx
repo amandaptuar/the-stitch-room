@@ -32,7 +32,7 @@ export default function ContactPage() {
   const [submittedInquiry, setSubmittedInquiry] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Prefill params from URL (e.g. from 3D Studio or Uniforms page)
+  // Prefill params from URL (e.g. from Uniforms page or Clients page)
   useEffect(() => {
     const cat = searchParams.get('category');
     const garment = searchParams.get('garment');
@@ -42,7 +42,7 @@ export default function ContactPage() {
 
     let initialNotes = '';
     if (garment && color) {
-      initialNotes = `Inquiry for custom 3D design: ${garment} in ${color}.`;
+      initialNotes = `Inquiry for custom design: ${garment} in ${color}.`;
     } else if (school) {
       initialNotes = `Inquiry regarding uniforms similar to ${school}.`;
     }
@@ -159,6 +159,24 @@ export default function ContactPage() {
                     <div>
                       <h4 style={{ fontSize: '0.98rem', marginBottom: '0.25rem', color: 'var(--color-secondary)' }}>Master Atelier Address</h4>
                       <p style={{ fontSize: '0.88rem', margin: 0, color: '#64748b', lineHeight: 1.5 }}>{BRAND_INFO.address}</p>
+                      <a
+                        href={BRAND_INFO.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          color: 'var(--color-primary)',
+                          fontWeight: '700',
+                          fontSize: '0.86rem',
+                          marginTop: '0.55rem',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <MapPin size={15} />
+                        <span>View Exact Location on Google Maps</span>
+                      </a>
                     </div>
                   </div>
 

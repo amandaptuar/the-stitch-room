@@ -177,8 +177,8 @@ export default function UniformsPage() {
                     Request Fabric Swatches
                     <ArrowRight size={16} />
                   </Link>
-                  <Link to="/3d-showroom" className="btn btn-outline btn-sm">
-                    Open in 3D Customizer
+                  <Link to="/clients" className="btn btn-outline btn-sm">
+                    View Partner Schools
                   </Link>
                 </div>
               </div>

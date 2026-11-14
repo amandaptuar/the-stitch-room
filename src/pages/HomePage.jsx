@@ -73,9 +73,9 @@ export default function HomePage() {
                 Request Bulk Consultation
                 <ArrowRight size={18} />
               </Link>
-              <Link to="/3d-showroom" className="btn btn-outline btn-lg">
+              <Link to="/uniforms" className="btn btn-outline btn-lg">
                 <Scissors size={18} />
-                Open 3D Uniform Studio
+                Explore Uniform Ranges
               </Link>
             </div>
 
@@ -242,12 +242,12 @@ export default function HomePage() {
                   {/* Dual Action Buttons */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginTop: 'auto' }}>
                     <Link
-                      to={`/3d-showroom?category=${cat.id}`}
+                      to="/uniforms"
                       className="btn btn-primary btn-sm"
                       style={{ width: '100%' }}
                     >
                       <Scissors size={14} />
-                      Customize in 3D Studio
+                      Explore {cat.title}
                     </Link>
                     <Link
                       to={`/contact?category=${cat.id}`}

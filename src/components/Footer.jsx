@@ -50,7 +50,6 @@ export default function Footer() {
               <li><Link to="/about" className="footer-link">About Our Heritage</Link></li>
               <li><Link to="/uniforms" className="footer-link">Uniforms & Specifications</Link></li>
               <li><Link to="/clients" className="footer-link">Partner Schools & Clients</Link></li>
-              <li><Link to="/3d-showroom" className="footer-link">3D Uniform Studio</Link></li>
               <li><Link to="/contact" className="footer-link">Request Consultation</Link></li>
             </ul>
           </div>
@@ -66,7 +65,7 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li><Link to="/3d-showroom" className="footer-link">Custom Embroidery & Badging</Link></li>
+              <li><Link to="/about" className="footer-link">Custom Embroidery & Badging</Link></li>
               <li><Link to="/uniforms" className="footer-link">Bespoke Institution Ties & Belts</Link></li>
             </ul>
           </div>
@@ -77,7 +76,27 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', fontSize: '0.9rem' }}>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                 <MapPin size={18} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '3px' }} />
-                <span>{BRAND_INFO.address}</span>
+                <div>
+                  <div>{BRAND_INFO.address}</div>
+                  <a
+                    href={BRAND_INFO.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      color: 'var(--color-primary)',
+                      fontWeight: '600',
+                      fontSize: '0.82rem',
+                      marginTop: '0.35rem',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    <span>View on Google Maps</span>
+                    <ArrowRight size={13} />
+                  </a>
+                </div>
               </div>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                 <Phone size={18} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />

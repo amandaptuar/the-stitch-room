@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
@@ -8,7 +8,6 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import UniformsPage from './pages/UniformsPage';
 import ClientsPage from './pages/ClientsPage';
-import Studio3DPage from './pages/Studio3DPage';
 import ContactPage from './pages/ContactPage';
 import CustomerPortalPage from './pages/CustomerPortalPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -52,9 +51,9 @@ export default function App() {
         <Route path="/uniforms" element={<PublicLayout><UniformsPage /></PublicLayout>} />
         <Route path="/modules" element={<PublicLayout><UniformsPage /></PublicLayout>} />
         <Route path="/clients" element={<PublicLayout><ClientsPage /></PublicLayout>} />
-        <Route path="/3d-showroom" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
-        <Route path="/3d-customizer" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
-        <Route path="/customizer" element={<PublicLayout><Studio3DPage /></PublicLayout>} />
+        <Route path="/3d-showroom" element={<Navigate to="/uniforms" replace />} />
+        <Route path="/3d-customizer" element={<Navigate to="/uniforms" replace />} />
+        <Route path="/customizer" element={<Navigate to="/uniforms" replace />} />
         <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
         <Route path="/customer-portal" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />
         <Route path="/customer-dashboard" element={<PublicLayout><CustomerPortalPage /></PublicLayout>} />

@@ -148,8 +148,8 @@ export default function FeaturedCarousel() {
               Inquire for This Range
               <ArrowRight size={16} />
             </Link>
-            <Link to="/3d-showroom" className="btn btn-outline btn-sm" style={{ flex: '1 1 200px' }}>
-              Customize in 3D Studio
+            <Link to="/uniforms" className="btn btn-outline btn-sm" style={{ flex: '1 1 200px' }}>
+              View Specifications
             </Link>
           </div>
         </div>

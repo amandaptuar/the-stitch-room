@@ -24,8 +24,8 @@ export default function Navbar() {
   const navLinks = [
     { label: 'Home', path: '/' },
     { label: 'About Us', path: '/about' },
+    { label: 'Uniforms', path: '/uniforms' },
     { label: 'Our Clients', path: '/clients' },
-    { label: '3D Studio', path: '/3d-showroom' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -35,10 +35,16 @@ export default function Navbar() {
       <div className="top-announcement-bar">
         <div className="container top-bar-inner">
           <div className="top-bar-left">
-            <span className="top-bar-link">
+            <a
+              href={BRAND_INFO.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="top-bar-link"
+              title="View on Google Maps"
+            >
               <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
               Katpadi, Vellore, Tamil Nadu
-            </span>
+            </a>
             <a href={`tel:${BRAND_INFO.phone1}`} className="top-bar-link">
               <Phone size={14} />
               {BRAND_INFO.phone1}
